@@ -1,6 +1,6 @@
 from flask import Flask, redirect
 
-from resources.task import Task, TaskList
+from resources.task import Task, TaskList, TaskSearch
 from flask_restful import Api
 from flasgger import Swagger
 
@@ -39,7 +39,7 @@ def env_config(name, default):
    app.config[name] = os.environ.get(name, default=default)
 
 #Database config
-env_config('SQLALCHEMY_DATABASE_URI','postgresql://postgres:postgres@localhost:5432/todo')
+env_config('SQLALCHEMY_DATABASE_URI','postgresql://postgres:Paraguay12@localhost:5432/todo')
 
 #SQLAlchemy config
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -54,6 +54,7 @@ def welcome():
  
 api.add_resource(Task, f'{PREFIX}/tasks/<id>')
 api.add_resource(TaskList, f'{PREFIX}/tasks')
+api.add_resource(TaskSearch, f'{PREFIX}/search/tasks')
 
 # Bloque opcional para ejecutar con python app.py
 if __name__ == '__main__':
